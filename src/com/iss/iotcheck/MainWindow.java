@@ -26,12 +26,11 @@ import com.iss.iotcheck.plugin.IProcessing;
 public class MainWindow {
     private JFrame frame;
     private JTextArea infoTextArea;
-    private JRadioButton waterRadioButton, airRadioButton, gasButton;
+    private JRadioButton waterRadioButton, airRadioButton, gasButton, tvocBtnTvoc;
     private JLabel checkResult;
     private List<JRadioButton> radioButtonList;
     private JScrollPane resultPanel;
     private JLabel label_1;
-    private JRadioButton rdbtnTvoc;
     
     /**
      * Launch the application.
@@ -94,8 +93,10 @@ public class MainWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 手动互斥
-                if(airRadioButton.isSelected()) {
-                    waterRadioButton.setSelected(false);
+                for(JRadioButton radio : radioButtonList) {
+                    if(!"大气".equals(radio.getText())) {                        
+                        radio.setSelected(false);
+                    }
                 }
             }
         });
@@ -128,16 +129,30 @@ public class MainWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 手动互斥
-                if(airRadioButton.isSelected()) {
-                    waterRadioButton.setSelected(false);
+                for(JRadioButton radio : radioButtonList) {
+                    if(!"废气".equals(radio.getText())) {                        
+                        radio.setSelected(false);
+                    }
                 }
             }
         });
         
-        rdbtnTvoc = new JRadioButton("TVOC");
-        rdbtnTvoc.setBackground(transparent);
-        rdbtnTvoc.setBounds(420, 5, 100, 23);
-        mainPanel.add(rdbtnTvoc);
+        tvocBtnTvoc = new JRadioButton("TVOC");
+        tvocBtnTvoc.setBackground(transparent);
+        tvocBtnTvoc.setBounds(420, 5, 100, 23);
+        mainPanel.add(tvocBtnTvoc);
+        tvocBtnTvoc.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 手动互斥
+                for(JRadioButton radio : radioButtonList) {
+                    if(!"TVOC".equals(radio.getText())) {                        
+                        radio.setSelected(false);
+                    }
+                }
+            }
+        });
         
         JLabel label = new JLabel("校验数据包：");
         label.setBackground(Color.DARK_GRAY);
@@ -159,8 +174,10 @@ public class MainWindow {
                 
                 if(waterRadioButton.isSelected()) {
                     type = Integer.valueOf(IProcessing.SURFACE_WATER_MONITOR_212);
-                } else if(airRadioButton.isSelected()) {
+                } else if(airRadioButton.isSelected() || tvocBtnTvoc.isSelected()) {
                     type = Integer.valueOf(IProcessing.AIR_MONITOR_MONITOR_212);
+                } else if(gasButton.isSelected()) {
+                    type = Integer.valueOf(IProcessing.AIR_POLLUTE_MONITOR_212);
                 } else {
                     result = "-2";
                     setCheckResult(result);
