@@ -18,7 +18,11 @@ import javax.swing.JTextArea;
 
 import com.iss.iotcheck.plugin.IProcessing;
 
-
+/**
+ * 启动页面，页面主框
+ * @author Liu Siyuan
+ *
+ */
 public class MainWindow {
     private JFrame frame;
     private JTextArea infoTextArea;
@@ -26,6 +30,8 @@ public class MainWindow {
     private JLabel checkResult;
     private List<JRadioButton> radioButtonList;
     private JScrollPane resultPanel;
+    private JLabel label_1;
+    private JRadioButton rdbtnTvoc;
     
     /**
      * Launch the application.
@@ -71,10 +77,32 @@ public class MainWindow {
         mainPanel.setLayout(null);
         
         Color transparent = new Color(00, 0, 0, 0);
-        // =======水、气选择按钮=======
+        // =======设备类型：水、气选择按钮=======
+        label_1 = new JLabel("设备类型：");
+        label_1.setBackground(Color.DARK_GRAY);
+        label_1.setBounds(10, 9, 97, 15);
+        mainPanel.add(label_1);
+        
+        airRadioButton = new JRadioButton("大气");
+        airRadioButton.setBackground(transparent);
+        airRadioButton.setBounds(110, 5, 100, 23);
+        mainPanel.add(airRadioButton);
+        airRadioButton.setSelected(true);
+        radioButtonList.add(airRadioButton);
+        airRadioButton.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 手动互斥
+                if(airRadioButton.isSelected()) {
+                    waterRadioButton.setSelected(false);
+                }
+            }
+        });
+        
         waterRadioButton = new JRadioButton("地表水");
         waterRadioButton.setBackground(transparent);
-        waterRadioButton.setBounds(247, 5, 121, 23);
+        waterRadioButton.setBounds(220, 5, 100, 23);
         mainPanel.add(waterRadioButton);
         radioButtonList.add(waterRadioButton);
         waterRadioButton.addActionListener(new ActionListener() {
@@ -90,26 +118,9 @@ public class MainWindow {
             }
         });
         
-        airRadioButton = new JRadioButton("大气");
-        airRadioButton.setBackground(transparent);
-        airRadioButton.setBounds(117, 5, 121, 23);
-        mainPanel.add(airRadioButton);
-        airRadioButton.setSelected(true);
-        radioButtonList.add(airRadioButton);
-        airRadioButton.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 手动互斥
-                if(airRadioButton.isSelected()) {
-                    waterRadioButton.setSelected(false);
-                }
-            }
-        });
-        
         gasButton = new JRadioButton("废气");
-        gasButton.setBackground(new Color(0, 0, 0, 0));
-        gasButton.setBounds(378, 5, 121, 23);
+        gasButton.setBackground(transparent);
+        gasButton.setBounds(320, 5, 100, 23);
         mainPanel.add(gasButton);
         radioButtonList.add(gasButton);
         gasButton.addActionListener(new ActionListener() {
@@ -122,6 +133,11 @@ public class MainWindow {
                 }
             }
         });
+        
+        rdbtnTvoc = new JRadioButton("TVOC");
+        rdbtnTvoc.setBackground(transparent);
+        rdbtnTvoc.setBounds(420, 5, 100, 23);
+        mainPanel.add(rdbtnTvoc);
         
         JLabel label = new JLabel("校验数据包：");
         label.setBackground(Color.DARK_GRAY);
@@ -154,12 +170,12 @@ public class MainWindow {
                 setCheckResult(result);
             }
         });
-        button.setBounds(613, 166, 93, 23);
+        button.setBounds(606, 167, 93, 23);
         mainPanel.add(button);
         
         infoTextArea = new JTextArea();
         infoTextArea.setBackground(Color.WHITE);
-        infoTextArea.setBounds(117, 34, 589, 122);
+        infoTextArea.setBounds(110, 34, 589, 122);
         infoTextArea.setLineWrap(true);
         infoTextArea.setText("##0223ST=22;CN=2011;PW=123456;MN=C037800AM2011;CP=&&DataTime=20180328235000;SO2-Rtd=19.0,SO2-Flag=N;NO2-Rtd=25.0,NO2-Flag=N;CO-Rtd=0.687,CO-Flag=N;O3-Rtd=76.0,O3-Flag=N;PM25-Rtd=75.0,PM25-Flag=N;PM10-Rtd=374.0,PM10-Flag=N&&4380");
         mainPanel.add(infoTextArea);
@@ -170,16 +186,18 @@ public class MainWindow {
         mainPanel.add(tipLabel);
         
         checkResult = new JLabel("结果");
-        checkResult.setBounds(117, 202, 588, 252);
+        checkResult.setBounds(114, 0, 588, 252);
         
         resultPanel = new JScrollPane(checkResult);
-        resultPanel.setBounds(115, 200, 590, 254);
+        resultPanel.setBounds(110, 200, 590, 254);
 
         //resultPanel.add(new JScrollPane(checkResult));
 //        JScrollPane jscrolJanel = new JScrollPane(
 //                checkResult, JScrollPane., JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 //        resultPanel.add(jscrolJanel);
         mainPanel.add(resultPanel);
+        
+
     }
     
     private void setCheckResult(String result) {
@@ -206,7 +224,7 @@ public class MainWindow {
             checkResult.setText("设备号错误！（字母加数字构成或者数字长度超过10位）");
             break;
         case IOTCheck.RE_HEADER_ERR://4
-            checkResult.setText("协议头部描述错误！(包头：固定为 ##+数据段长度+ST系统类型)");
+            checkResult.setText("协议头部描述错误！(包头：固定为 ##+数据段长度+ST系统类型)(或者设备类型选择错误)");
             break;
         default:
             checkResult.setText(result);
