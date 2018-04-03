@@ -146,6 +146,7 @@ public class MainWindow {
         tvocBtnTvoc.setBackground(transparent);
         tvocBtnTvoc.setBounds(420, 5, 100, 23);
         mainPanel.add(tvocBtnTvoc);
+        radioButtonList.add(tvocBtnTvoc);
         tvocBtnTvoc.addActionListener(new ActionListener() {
             
             @Override
