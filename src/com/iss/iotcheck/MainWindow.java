@@ -70,12 +70,7 @@ public class MainWindow {
         frame.setBounds(100, 100, 750, 492);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-//        File iconFile = new File("D:/iotchecktool/images/iot_icon.png");
-//        if(iconFile.exists()) {
-//            frame.setIconImage(Toolkit.getDefaultToolkit().getImage(iconFile.getAbsolutePath()));
-//        } else {            
-            frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/images/iot_icon.png")));
-//        }
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/images/iot_icon.png")));
         frame.setResizable(false);
         
         JPanel mainPanel = new JPanel();
