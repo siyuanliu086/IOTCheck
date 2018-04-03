@@ -7,6 +7,7 @@ import com.iss.iotcheck.model.OlMonitorWaterData;
 import com.iss.iotcheck.plugin.IProcessing;
 import com.iss.iotcheck.plugin.NationalStandard212;
 import com.iss.iotcheck.plugin.Process212;
+import com.iss.iotcheck.plugin.ProcessTVOC212;
 import com.iss.iotcheck.plugin.ProcessWater212;
 import com.iss.iotcheck.tools.DateHelper;
 import com.iss.iotcheck.tools.StringUtil;
@@ -29,11 +30,14 @@ public class IOTCheckImpl implements IOTCheck{
             // 大气
             IProcessing p1 = new Process212();
             IProcessing p2 = new NationalStandard212();
+            IProcessing p3 = new ProcessTVOC212();
             List<OlMonitorMinData> minData = null;
             if(p1.CheckData(mess)) {
                 minData = (List<OlMonitorMinData>) p1.Process(mess);
             } else if(p2.CheckData(mess)) {
                 minData = (List<OlMonitorMinData>) p2.Process(mess);
+            } else if(p3.CheckData(mess)) {
+                minData = (List<OlMonitorMinData>) p3.Process(mess);
             } else {
                 return HEADER_ERR;
             }
@@ -65,12 +69,12 @@ public class IOTCheckImpl implements IOTCheck{
             } else {
                 // 输出TVOC监测因子+气象五参
                 return "<html><body><b>检测成功</b><br/>设备: " + deviceId + "<br/>时间: " + DateHelper.format(monitorMinData.getMonitorTime())
-                + "<br/>PM2.5: " + monitorMinData.getPm25() + "<br/>PM10: " + monitorMinData.getPm10()
-                + "<br/>SO2: " + monitorMinData.getSo2() + "<br/>CO: " + monitorMinData.getCo()
-                + "<br/>O3: " + monitorMinData.getO3() + "<br/>NO2: " + monitorMinData.getNo2()
-                + "<br/>WS: " + monitorMinData.getWs() + "<br/>WD: " + monitorMinData.getWd()
-                + "<br/>TEM: " + monitorMinData.getTem() + "<br/>RH: " + monitorMinData.getRh()
-                + "<br/>PA: " + monitorMinData.getWs() 
+                + "<br/>含氧量: " + monitorMinData.getO2_content() + "<br/>烟气流速: " + monitorMinData.getStack_gas_velocity()
+                + "<br/>烟气温度: " + monitorMinData.getGas_tem() + "<br/>烟气湿度: " + monitorMinData.getGas_rh()
+                + "<br/>烟气压力: " + monitorMinData.getGas_pa() + "<br/>废气: " + monitorMinData.getWaste_gas()
+                + "<br/>烟尘: " + monitorMinData.getSoot() + "<br/>烟尘采样折算值: " + monitorMinData.getSoot_zs()
+                + "<br/>SO2: " + monitorMinData.getSo2() + "<br/>SO2采样折算值: " + monitorMinData.getSo2_zs()
+                + "<br/>氮氧化物: " + monitorMinData.getNox() + "<br/>氮氧化物采样折算值: " + monitorMinData.getNox_zs() 
                 + "</body>"; 
             }
         } else if(Integer.valueOf(IProcessing.SURFACE_WATER_MONITOR_212) == type) {

@@ -176,9 +176,9 @@ public class MainWindow {
                 
                 if(waterRadioButton.isSelected()) {//水
                     type = Integer.valueOf(IProcessing.SURFACE_WATER_MONITOR_212);
-                } else if(airRadioButton.isSelected() || tvocBtnTvoc.isSelected()) {//气
+                } else if(airRadioButton.isSelected()) {//气
                     type = Integer.valueOf(IProcessing.AIR_MONITOR_MONITOR_212);
-                } else if(gasButton.isSelected()) {//废气
+                } else if(tvocBtnTvoc.isSelected()) {//tvoc
                     type = Integer.valueOf(IProcessing.AIR_POLLUTE_MONITOR_212);
                 } else {
                     result = "-2";
