@@ -130,7 +130,12 @@ public class ProcessWater212 implements IProcessing {
 
 		String data = command.substring(dbeginIndex, dendIndex);
 		String crckey = command.substring(dendIndex + 2, command.length());
-		int icrckey = Integer.parseInt(crckey+"", 16);
+		int icrckey = 0;
+        try {
+            icrckey = Integer.parseInt(crckey+"", 16);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
 		String crcdata = command.substring(hbeginIndex, dendIndex + 2);
 
