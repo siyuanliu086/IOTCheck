@@ -168,11 +168,11 @@ public class MainWindow {
         JButton button = new JButton("检测");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String result = "0";
+                String result = IOTCheck.RE_CODE_OK;
                 int type = 0;
                 String mess = infoTextArea.getText().toString().trim();
-                if(mess == null || mess.length() == 0) {
-                    result = "-1";
+                if(mess == null || mess.length() < 4) {
+                    result = IOTCheck.RE_MESS_EMP;
                     setCheckResult(result);
                     return;
                 } 
@@ -184,7 +184,7 @@ public class MainWindow {
                 } else if(tvocBtnTvoc.isSelected()) {//tvoc
                     type = Integer.valueOf(IProcessing.AIR_POLLUTE_MONITOR_212);
                 } else {
-                    result = "-2";
+                    result = IOTCheck.RE_MN_EMP;
                     setCheckResult(result);
                     return;
                 }
@@ -218,34 +218,6 @@ public class MainWindow {
     }
     
     private void setCheckResult(String result) {
-        switch (result) {
-        case "-2":
-            checkResult.setText(IOTCheck.RE_MN_EMP);
-            break;
-        case "-1":
-            checkResult.setText(IOTCheck.RE_MESS_EMP);
-            break;
-        case IOTCheck.CODE_OK://0
-            checkResult.setText(IOTCheck.RE_CODE_OK);
-            break;
-        case IOTCheck.CRC_ERR://1
-            checkResult.setText(IOTCheck.RE_CRC_ERR);
-            break;
-        case IOTCheck.EMPTY_CHAR_ERR://2
-            checkResult.setText(IOTCheck.RE_EMPTY_CHAR_ERR);
-            break;
-        case IOTCheck.PROTOCOL212_OTHER_ERR://2
-            checkResult.setText(IOTCheck.RE_PROTOCOL212_OTHER_ERR);
-            break;
-        case IOTCheck.MN_ERR://3
-            checkResult.setText(IOTCheck.RE_MN_ERR);
-            break;
-        case IOTCheck.HEADER_ERR://4
-            checkResult.setText(IOTCheck.RE_HEADER_ERR);
-            break;
-        default:
-            checkResult.setText(result);
-        }
-        
+        checkResult.setText(result);
     }
 }

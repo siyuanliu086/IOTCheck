@@ -27,6 +27,13 @@ public class IOTCheckImpl implements IOTCheck{
     public String checkMessage(String mess, int type) {
         if(Integer.valueOf(IProcessing.AIR_MONITOR_MONITOR_212) == type
                 || Integer.valueOf(IProcessing.AIR_POLLUTE_MONITOR_212) == type) {
+            if(!"##".equals(mess.substring(0, 2))) {
+                return RE_START_CHAR_ERR;
+            }
+            int start = mess.lastIndexOf("&&");
+            if(!isHexNumber(mess.substring(start + 2, mess.length()))) {
+                return RE_CRC_STRING_ERR;
+            }
             // 大气
             IProcessing p1 = new Process212();
             IProcessing p2 = new NationalStandard212();
@@ -39,22 +46,22 @@ public class IOTCheckImpl implements IOTCheck{
             } else if(p3.CheckData(mess)) {
                 minData = (List<OlMonitorMinData>) p3.Process(mess);
             } else {
-                return HEADER_ERR;
+                return RE_HEADER_ERR;
             }
             if(minData.size() == 0) {
                 if(!checkCRC(mess)) {
                     // CRC校验错误
-                    return CRC_ERR;
+                    return RE_CRC_ERR;
                 } else {                    
                     // 不知道什么情况
-                    return PROTOCOL212_OTHER_ERR;
+                    return RE_PROTOCOL212_OTHER_ERR;
                 }
             }
             OlMonitorMinData monitorMinData = minData.get(0);
             String deviceId = monitorMinData.getDeviceId();
             // 检查设备号
             if(!checkDevieId(deviceId)) {
-                return PROTOCOL212_OTHER_ERR;
+                return RE_PROTOCOL212_OTHER_ERR;
             }
             if(Integer.valueOf(IProcessing.AIR_MONITOR_MONITOR_212) == type) {
                 // 输出大气监测因子+气象五参
@@ -80,31 +87,38 @@ public class IOTCheckImpl implements IOTCheck{
             }
         } else if(Integer.valueOf(IProcessing.SURFACE_WATER_MONITOR_212) == type) {
             // 水
+            if(!"##".equals(mess.substring(0, 2))) {
+                return RE_START_CHAR_ERR;
+            }
+            int start = mess.lastIndexOf("&&");
+            if(!isHexNumber(mess.substring(start + 2, mess.length()))) {
+                return RE_CRC_STRING_ERR;
+            }
             IProcessing p = new ProcessWater212();
             List<OlMonitorWaterData> minData = null;
             if(p.CheckData(mess)) {
                 if(p.CheckData(mess)) {
                     minData = (List<OlMonitorWaterData>) p.Process(mess);
                 } else {
-                    return HEADER_ERR;
+                    return RE_HEADER_ERR;
                 }
             } else {
-                return HEADER_ERR;
+                return RE_HEADER_ERR;
             }
             if(minData.size() == 0) {
                 if(!checkCRC(mess)) {
                     // CRC检测错误
-                    return CRC_ERR;
+                    return RE_CRC_ERR;
                 } else {                    
                     // 不知道什么情况
-                    return PROTOCOL212_OTHER_ERR;
+                    return RE_PROTOCOL212_OTHER_ERR;
                 }
             }
             OlMonitorWaterData monitorMinData = minData.get(0);
             String deviceId = monitorMinData.getDeviceId();
             // 检查设备号
             if(!checkDevieId(deviceId)) {
-                return PROTOCOL212_OTHER_ERR;
+                return RE_PROTOCOL212_OTHER_ERR;
             }
             
             // 结果
@@ -126,7 +140,7 @@ public class IOTCheckImpl implements IOTCheck{
             + "<br/>algae: " + monitorMinData.getAlgae()
             + "</body>";
         }
-        return CODE_OK;
+        return RE_CODE_OK;
     }
 
     private static boolean checkCRC(String mess) {
@@ -176,4 +190,18 @@ public class IOTCheckImpl implements IOTCheck{
         }
         return contain;
     }
+    
+    //十六进制  
+    private static boolean isHexNumber(String str){  
+        boolean flag = true;  
+        for(int i=0;i<str.length();i++){  
+            char cc = str.charAt(i);  
+            if(!(cc=='0'||cc=='1'||cc=='2'||cc=='3'||cc=='4'||cc=='5'||cc=='6'||cc=='7'||cc=='8'||cc=='9'||cc=='A'||cc=='B'||cc=='C'||  
+                    cc=='D'||cc=='E'||cc=='F'||cc=='a'||cc=='b'||cc=='c'||cc=='c'||cc=='d'||cc=='e'||cc=='f')){  
+                flag = false;  
+                break;
+            }  
+        }  
+        return flag;  
+    }  
 }

@@ -10,25 +10,13 @@ package com.iss.iotcheck;
  *
  */
 public interface IOTCheck {
-    /**检测成功*/
-    String CODE_OK = "0";
-    /**CRC检测算法错误*/
-    String CRC_ERR = "1";
-    /**数据错误（不允许包含空格）*/
-    String EMPTY_CHAR_ERR = "20";
-    /**数据错误（其他）*/
-    String PROTOCOL212_OTHER_ERR = "21";
-    /**设备号错误（字母加数字构成或者数字长度超过10位）*/
-    String MN_ERR = "30";
-    /**协议头部描述错误(包头：固定为 ##+数据段长度)*/
-    String HEADER_ERR = "40";
-    
-    
+    String RE_CODE_OK = "检测成功！";
     String RE_MN_EMP = "请选择设备类型！";
     String RE_MESS_EMP = "请输入检测数据包！";
-    String RE_CODE_OK = "检测成功！";
     String RE_CRC_ERR = "数据错误！（CRC校验算法错误）";
+    String RE_CRC_STRING_ERR = "数据错误！（CRC段必须为16进制）";
     String RE_EMPTY_CHAR_ERR = "数据错误！（不允许包含空格）";
+    String RE_START_CHAR_ERR = "数据错误！（包头：固定为##）";
     String RE_PROTOCOL212_OTHER_ERR = "数据错误！（其他）";
     String RE_MN_ERR = "设备号错误！（字母加数字构成或者数字长度超过10位）";
     String RE_HEADER_ERR = "协议头部描述错误！(包头：固定为 ##+数据段长度+ST系统类型)(或者设备类型选择错误)";
