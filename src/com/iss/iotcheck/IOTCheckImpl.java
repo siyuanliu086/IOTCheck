@@ -137,16 +137,16 @@ public class IOTCheckImpl implements IOTCheck{
         return CRC.equals(mess.substring(end + 2, mess.length()));
     }
 
-    public static void main(String[] args) {
-//        String[] dev = new String[] {
-//                "123",
-//                "abc",
-//                "123abc",
-//                "123456"
-//        };
-//        Arrays.asList(dev).forEach(s -> System.out.println(checkDevieId(s)));
-        System.out.println(checkCRC("##0223ST=22;CN=2011;PW=123456;MN=C037800AM2011;CP=&&DataTime=20180328235000;SO2-Rtd=19.0,SO2-Flag=N;NO2-Rtd=25.0,NO2-Flag=N;CO-Rtd=0.687,CO-Flag=N;O3-Rtd=76.0,O3-Flag=N;PM25-Rtd=75.0,PM25-Flag=N;PM10-Rtd=374.0,PM10-Flag=N&&4380"));
-    }
+//    public static void main(String[] args) {
+////        String[] dev = new String[] {
+////                "123",
+////                "abc",
+////                "123abc",
+////                "123456"
+////        };
+////        Arrays.asList(dev).forEach(s -> System.out.println(checkDevieId(s)));
+//        System.out.println(checkCRC("##0223ST=22;CN=2011;PW=123456;MN=C037800AM2011;CP=&&DataTime=20180328235000;SO2-Rtd=19.0,SO2-Flag=N;NO2-Rtd=25.0,NO2-Flag=N;CO-Rtd=0.687,CO-Flag=N;O3-Rtd=76.0,O3-Flag=N;PM25-Rtd=75.0,PM25-Flag=N;PM10-Rtd=374.0,PM10-Flag=N&&4380"));
+//    }
     
     private static boolean checkDevieId(String str) {
         if(str == null || str.length() ==0 || str.length() < 10) {

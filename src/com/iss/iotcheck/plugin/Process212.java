@@ -367,11 +367,11 @@ public class Process212 implements IProcessing {
 		return CRC;
 	}
 	
-	public static void main(String[] args) {
-        Process212 p = new Process212();
-        String command = "##0372QN=20180315134456001;ST=31;CN=2011;PW=123456;MN=TY0102183V0001;CP=&&DataTime=20180315134400;S03-Rtd=147.12,S03-Flag=N;S08-Rtd=1.349,S08-Flag=N;S05-Rtd=8.000,S05-Flag=N;S01-Rtd=14.913,S01-Flag=N;S02-Rtd=6.38,S02-Flag=N;B02-Rtd=3600.0,B02-Flag=N;01-Rtd=25.2100,01-ZsRtd=63.6616,01-Flag=N;02-Rtd=20.3400,02-ZsRtd=51.0317,02-Flag=N;03-Rtd=50.5467,03-ZsRtd=125.0510,03-Flag=N&&A781";
-        p.Process(command );
-    }
+//	public static void main(String[] args) {
+//        Process212 p = new Process212();
+//        String command = "##0372QN=20180315134456001;ST=31;CN=2011;PW=123456;MN=TY0102183V0001;CP=&&DataTime=20180315134400;S03-Rtd=147.12,S03-Flag=N;S08-Rtd=1.349,S08-Flag=N;S05-Rtd=8.000,S05-Flag=N;S01-Rtd=14.913,S01-Flag=N;S02-Rtd=6.38,S02-Flag=N;B02-Rtd=3600.0,B02-Flag=N;01-Rtd=25.2100,01-ZsRtd=63.6616,01-Flag=N;02-Rtd=20.3400,02-ZsRtd=51.0317,02-Flag=N;03-Rtd=50.5467,03-ZsRtd=125.0510,03-Flag=N&&A781";
+//        p.Process(command );
+//    }
 
 	@Override
 	public boolean IsComputerAQI() {

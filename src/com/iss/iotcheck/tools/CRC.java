@@ -38,8 +38,5 @@ public class CRC {
     public static final String getInteger2Hex(int value) {
         return Integer.toHexString(value).toUpperCase();
     }
-    
-    public static void main(String[] args) {
-        System.out.println(getInteger2Hex(getCRC("ST=22;CN=2011;PW=123456;MN=781703664AM0001;CP=&&DataTime=20170823170249;CO-Rtd=2.1367521,CO-Flag=N;NO2-Rtd=0.85470086,NO2-Flag=N;SO2-Rtd=13.675214,SO2-Flag=N;O3-Rtd=21.794872,O3-Flag=N;NOIS-Rtd=14.529915,NOIS-Flag=N;PM25-Rtd=41.025642,PM25-Flag=N;PM10-Rtd=29.05983,PM10-Flag=N;TEM-Rtd=8.119658,TEM-Flag=N;RH-Rtd=31.623932,RH-Flag=N;WD-Rtd=2.1367521,WD-Flag=N;WS-Rtd=36.752136,WS-Flag=N;PA-Rtd=36.752136,PA-Flag=N;TSP-Rtd=38.46154,TSP-Flag=N&&")));
-    }
+
 }

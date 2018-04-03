@@ -315,15 +315,15 @@ public class NationalStandard212 implements IProcessing {
 		return "国标";
 	}
 	
-	public static void main(String[] args) {
-	    String data = "##0450QN=20180117161800837;ST=null;CN=2011;PW=123456;MN=null;CP=&&DataTime=20180117161800;a21005-Rtd=3.31,a21005-Flag=N;a21004-Rtd=74,a21004-Flag=N;a21026-Rtd=34,a21026-Flag=N;a21030-Rtd=8.1,a21030-Flag=N;LA-Rtd=3,LA-Flag=N;a34004-Rtd=163,a34004-Flag=N;a34002-Rtd=257,a34002-Flag=N;a01001-Rtd=10,a01001-Flag=N;a01002-Rtd=6,a01002-Flag=N;a01008-Rtd=0,a01008-Flag=N;a01007-Rtd=10,a01007-Flag=N;a01006-Rtd=0.98,a01006-Flag=N;a34001-Rtd=5,a34001-Flag=N&&7580";
-        //String data = "##0481QN=20160801085000001;ST=22;CN=2011;PW=123456;MN=010000A8900016F000169DC0;Flag=7;CP=&&DataTime=20160801084000;a21005-Rtd=1.1,a21005-Flag=N;a21004-Rtd=112,a21004-Flag=N;a21026-Rtd=58,a21026-Flag=N;a21030-Rtd=64,a21030-Flag=N;LA-Rtd=50.1,LA-Flag=N;a34004-Rtd=207,a34004-Flag=N;a34002-Rtd=295,a34002-Flag=N;a01001-Rtd=12.6,a01001-Flag=N;a01002-Rtd=32,a01002-Flag=N;a01006-Rtd=101.02,a01006-Flag=N;a01007-Rtd=2.1,a01007-Flag=N;a01008-Rtd=120,a01008-Flag=N;a34001-Rtd=217,a34001-Flag=N;&&4f40";
-        NationalStandard212 standard212 = new NationalStandard212();
-        if(standard212.CheckData(data)) {
-            List<OlMonitorMinData> min = standard212.Process(data);
-            System.out.println(min.size());
-        }
-    }
+//	public static void main(String[] args) {
+//	    String data = "##0450QN=20180117161800837;ST=null;CN=2011;PW=123456;MN=null;CP=&&DataTime=20180117161800;a21005-Rtd=3.31,a21005-Flag=N;a21004-Rtd=74,a21004-Flag=N;a21026-Rtd=34,a21026-Flag=N;a21030-Rtd=8.1,a21030-Flag=N;LA-Rtd=3,LA-Flag=N;a34004-Rtd=163,a34004-Flag=N;a34002-Rtd=257,a34002-Flag=N;a01001-Rtd=10,a01001-Flag=N;a01002-Rtd=6,a01002-Flag=N;a01008-Rtd=0,a01008-Flag=N;a01007-Rtd=10,a01007-Flag=N;a01006-Rtd=0.98,a01006-Flag=N;a34001-Rtd=5,a34001-Flag=N&&7580";
+//        //String data = "##0481QN=20160801085000001;ST=22;CN=2011;PW=123456;MN=010000A8900016F000169DC0;Flag=7;CP=&&DataTime=20160801084000;a21005-Rtd=1.1,a21005-Flag=N;a21004-Rtd=112,a21004-Flag=N;a21026-Rtd=58,a21026-Flag=N;a21030-Rtd=64,a21030-Flag=N;LA-Rtd=50.1,LA-Flag=N;a34004-Rtd=207,a34004-Flag=N;a34002-Rtd=295,a34002-Flag=N;a01001-Rtd=12.6,a01001-Flag=N;a01002-Rtd=32,a01002-Flag=N;a01006-Rtd=101.02,a01006-Flag=N;a01007-Rtd=2.1,a01007-Flag=N;a01008-Rtd=120,a01008-Flag=N;a34001-Rtd=217,a34001-Flag=N;&&4f40";
+//        NationalStandard212 standard212 = new NationalStandard212();
+//        if(standard212.CheckData(data)) {
+//            List<OlMonitorMinData> min = standard212.Process(data);
+//            System.out.println(min.size());
+//        }
+//    }
 
     @Override
     public String GetProcessSysCode() {

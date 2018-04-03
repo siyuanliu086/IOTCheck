@@ -368,14 +368,14 @@ public class ProcessWater212 implements IProcessing {
 		return "地表水监测212解析";
 	}
 	
-	public static void main(String[] args) {
-	    String data = "##0823ST=21;CN=2011;PW=123456;MN=huantai_device_0001;CP=&&DataTime=20180319155633;w01018-Rtd=2.01,w01018-Flag=N;w01017-Rtd=2.11,w01017-Flag=N;w21003-Rtd=83,w21003-Flag=N;w01019-Rtd=34,w01019-Flag=N;w01001-Rtd=51.6,w01001-Flag=N;w01009-Rtd=11,w01009-Flag=N;w01014-Rtd=69,w01014-Flag=N;a01021-Rtd=101,a01021-Flag=N;w01010-Rtd=-0.18,w01010-Flag=N;w21011-Rtd=18,w21011-Flag=N;w21001-Rtd=10,w21001-Flag=N;w20122-Rtd=11,w20122-Flag=N;w20139-Rtd=3,w20139-Flag=N;w21017-Rtd=3,w21017-Flag=N;w20141-Rtd=1,w20141-Flag=N;w20142-Rtd=1.03,w20142-Flag=N;w20143-Rtd=11,w20143-Flag=N;w20144-Rtd=7,w20144-Flag=N;w20117-Rtd=4,w20117-Flag=N;w20125-Rtd=1,w20125-Flag=N;w21016-Rtd=7,w21016-Flag=N;w23002-Rtd=1,w23002-Flag=N;w22001-Rtd=11,w22001-Flag=N;w19002-Rtd=10,w19002-Flag=N;w21019-Rtd=8,w21019-Flag=N;w2100721001-Rtd=7,w2100721001-Flag=N&&4980";
-        ProcessWater212 standard212 = new ProcessWater212();
-        if(standard212.CheckData(data)) {
-            List<OlMonitorWaterData> min = standard212.Process(data);
-            System.out.println(min.size());
-        }
-    }
+//	public static void main(String[] args) {
+//	    String data = "##0823ST=21;CN=2011;PW=123456;MN=huantai_device_0001;CP=&&DataTime=20180319155633;w01018-Rtd=2.01,w01018-Flag=N;w01017-Rtd=2.11,w01017-Flag=N;w21003-Rtd=83,w21003-Flag=N;w01019-Rtd=34,w01019-Flag=N;w01001-Rtd=51.6,w01001-Flag=N;w01009-Rtd=11,w01009-Flag=N;w01014-Rtd=69,w01014-Flag=N;a01021-Rtd=101,a01021-Flag=N;w01010-Rtd=-0.18,w01010-Flag=N;w21011-Rtd=18,w21011-Flag=N;w21001-Rtd=10,w21001-Flag=N;w20122-Rtd=11,w20122-Flag=N;w20139-Rtd=3,w20139-Flag=N;w21017-Rtd=3,w21017-Flag=N;w20141-Rtd=1,w20141-Flag=N;w20142-Rtd=1.03,w20142-Flag=N;w20143-Rtd=11,w20143-Flag=N;w20144-Rtd=7,w20144-Flag=N;w20117-Rtd=4,w20117-Flag=N;w20125-Rtd=1,w20125-Flag=N;w21016-Rtd=7,w21016-Flag=N;w23002-Rtd=1,w23002-Flag=N;w22001-Rtd=11,w22001-Flag=N;w19002-Rtd=10,w19002-Flag=N;w21019-Rtd=8,w21019-Flag=N;w2100721001-Rtd=7,w2100721001-Flag=N&&4980";
+//        ProcessWater212 standard212 = new ProcessWater212();
+//        if(standard212.CheckData(data)) {
+//            List<OlMonitorWaterData> min = standard212.Process(data);
+//            System.out.println(min.size());
+//        }
+//    }
 
     @Override
     public String GetProcessSysCode() {
