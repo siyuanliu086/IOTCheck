@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +70,12 @@ public class MainWindow {
         frame.setBounds(100, 100, 750, 492);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iot_icon.png"));
+//        File iconFile = new File("D:/iotchecktool/images/iot_icon.png");
+//        if(iconFile.exists()) {
+//            frame.setIconImage(Toolkit.getDefaultToolkit().getImage(iconFile.getAbsolutePath()));
+//        } else {            
+            frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/images/iot_icon.png")));
+//        }
         frame.setResizable(false);
         
         JPanel mainPanel = new JPanel();
@@ -157,12 +163,12 @@ public class MainWindow {
             }
         });
         
-        JLabel label = new JLabel("校验数据包：");
+        JLabel label = new JLabel("检测数据包：");
         label.setBackground(Color.DARK_GRAY);
         label.setBounds(10, 34, 97, 15);
         mainPanel.add(label);
         
-        JButton button = new JButton("校验");
+        JButton button = new JButton("检测");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String result = "0";
@@ -199,7 +205,7 @@ public class MainWindow {
         infoTextArea.setText("##0223ST=22;CN=2011;PW=123456;MN=C037800AM2011;CP=&&DataTime=20180328235000;SO2-Rtd=19.0,SO2-Flag=N;NO2-Rtd=25.0,NO2-Flag=N;CO-Rtd=0.687,CO-Flag=N;O3-Rtd=76.0,O3-Flag=N;PM25-Rtd=75.0,PM25-Flag=N;PM10-Rtd=374.0,PM10-Flag=N&&4380");
         mainPanel.add(infoTextArea);
         
-        JLabel tipLabel = new JLabel("校验结果：");
+        JLabel tipLabel = new JLabel("检测结果：");
         tipLabel.setBackground(Color.DARK_GRAY);
         tipLabel.setBounds(10, 202, 97, 15);
         mainPanel.add(tipLabel);
