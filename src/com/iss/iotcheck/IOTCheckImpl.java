@@ -58,13 +58,14 @@ public class IOTCheckImpl implements IOTCheck{
             }
             if(Integer.valueOf(IProcessing.AIR_MONITOR_MONITOR_212) == type) {
                 // 输出大气监测因子+气象五参
-                return "<html><body><b>检测成功</b><br/>设备: " + deviceId + "<br/>时间: " + DateHelper.format(monitorMinData.getMonitorTime())
-                + "<br/>PM2.5: " + monitorMinData.getPm25() + "<br/>PM10: " + monitorMinData.getPm10()
+                return "<html><body><b>检测成功>>></b><br/>设备: " + deviceId + "<br/>时间: " + DateHelper.format(monitorMinData.getMonitorTime())
+                + "<hr>PM2.5: " + monitorMinData.getPm25() + "<br/>PM10: " + monitorMinData.getPm10()
                 + "<br/>SO2: " + monitorMinData.getSo2() + "<br/>CO: " + monitorMinData.getCo()
                 + "<br/>O3: " + monitorMinData.getO3() + "<br/>NO2: " + monitorMinData.getNo2()
                 + "<br/>WS: " + monitorMinData.getWs() + "<br/>WD: " + monitorMinData.getWd()
                 + "<br/>TEM: " + monitorMinData.getTem() + "<br/>RH: " + monitorMinData.getRh()
-                + "<br/>PA: " + monitorMinData.getWs() 
+                + "<br/>PA: " + monitorMinData.getWs() + "<br/>TSP: " + monitorMinData.getTsp()
+                + "<br/>噪声: " + monitorMinData.getNoise() 
                 + "</body>"; 
             } else {
                 // 输出TVOC监测因子+气象五参
