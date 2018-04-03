@@ -32,6 +32,8 @@ public class MainWindow {
     private JScrollPane resultPanel;
     private JLabel label_1;
     
+    private IOTCheck iotCheck;
+    
     /**
      * Launch the application.
      */
@@ -60,9 +62,10 @@ public class MainWindow {
      * Initialize the contents of the frame.
      */
     private void initialize() {
+        iotCheck = new IOTCheckImpl();
         radioButtonList = new ArrayList<>();
         
-        frame = new JFrame("软通IOT数据校验工具");
+        frame = new JFrame("软通IOT数据检测工具");
         frame.setBounds(100, 100, 750, 492);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
@@ -162,7 +165,6 @@ public class MainWindow {
         JButton button = new JButton("校验");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("-----校验");
                 String result = "0";
                 int type = 0;
                 String mess = infoTextArea.getText().toString().trim();
@@ -172,18 +174,18 @@ public class MainWindow {
                     return;
                 } 
                 
-                if(waterRadioButton.isSelected()) {
+                if(waterRadioButton.isSelected()) {//水
                     type = Integer.valueOf(IProcessing.SURFACE_WATER_MONITOR_212);
-                } else if(airRadioButton.isSelected() || tvocBtnTvoc.isSelected()) {
+                } else if(airRadioButton.isSelected() || tvocBtnTvoc.isSelected()) {//气
                     type = Integer.valueOf(IProcessing.AIR_MONITOR_MONITOR_212);
-                } else if(gasButton.isSelected()) {
+                } else if(gasButton.isSelected()) {//废气
                     type = Integer.valueOf(IProcessing.AIR_POLLUTE_MONITOR_212);
                 } else {
                     result = "-2";
                     setCheckResult(result);
                     return;
                 }
-                result = IOTCheck.checkMessage(mess, type);
+                result = iotCheck.checkMessage(mess, type);
                 setCheckResult(result);
             }
         });
@@ -208,40 +210,34 @@ public class MainWindow {
         resultPanel = new JScrollPane(checkResult);
         resultPanel.setBounds(110, 200, 590, 254);
 
-        //resultPanel.add(new JScrollPane(checkResult));
-//        JScrollPane jscrolJanel = new JScrollPane(
-//                checkResult, JScrollPane., JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        resultPanel.add(jscrolJanel);
         mainPanel.add(resultPanel);
-        
-
     }
     
     private void setCheckResult(String result) {
         switch (result) {
         case "-2":
-            checkResult.setText("请选择设备类型！");
+            checkResult.setText(IOTCheck.RE_MN_EMP);
             break;
         case "-1":
-            checkResult.setText("请输入检测数据包！");
+            checkResult.setText(IOTCheck.RE_MESS_EMP);
             break;
-        case IOTCheck.RE_CODE_OK://0
-            checkResult.setText("校验成功！");
+        case IOTCheck.CODE_OK://0
+            checkResult.setText(IOTCheck.RE_CODE_OK);
             break;
-        case IOTCheck.RE_CRC_ERR://1
-            checkResult.setText("数据错误！（CRC校验算法错误）");
+        case IOTCheck.CRC_ERR://1
+            checkResult.setText(IOTCheck.RE_CRC_ERR);
             break;
-        case IOTCheck.RE_EMPTY_CHAR_ERR://2
-            checkResult.setText("数据错误！（不允许包含空格）");
+        case IOTCheck.EMPTY_CHAR_ERR://2
+            checkResult.setText(IOTCheck.RE_EMPTY_CHAR_ERR);
             break;
-        case IOTCheck.RE_212_OTHER_ERR://2
-            checkResult.setText("数据错误！");
+        case IOTCheck.PROTOCOL212_OTHER_ERR://2
+            checkResult.setText(IOTCheck.RE_PROTOCOL212_OTHER_ERR);
             break;
-        case IOTCheck.RE_MN_ERR://3
-            checkResult.setText("设备号错误！（字母加数字构成或者数字长度超过10位）");
+        case IOTCheck.MN_ERR://3
+            checkResult.setText(IOTCheck.RE_MN_ERR);
             break;
-        case IOTCheck.RE_HEADER_ERR://4
-            checkResult.setText("协议头部描述错误！(包头：固定为 ##+数据段长度+ST系统类型)(或者设备类型选择错误)");
+        case IOTCheck.HEADER_ERR://4
+            checkResult.setText(IOTCheck.RE_HEADER_ERR);
             break;
         default:
             checkResult.setText(result);
